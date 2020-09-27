@@ -1,0 +1,2 @@
+# dnmp alias
+alias dnode='docker exec -it node /bin/bash'
