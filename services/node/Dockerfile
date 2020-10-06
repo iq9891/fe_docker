@@ -3,9 +3,20 @@ FROM ${NODE_VERSION}
 
 ARG TZ
 ARG CONTAINER_PACKAGE_URL
+ARG YARN_ENV
+
+RUN if [ "$YARN_ENV" = "2" ]; then \
+    rm -rf /usr/local/bin/yarn;\
+    rm -rf /usr/local/bin/yarnpkg;\
+    rm -rf /opt/yarn-v$YARN_VERSION/bin/yarn;\
+    rm -rf /opt/yarn-v$YARN_VERSION/bin/yarnpkg;\
+    npm config set registry https://registry.npm.taobao.org ;\
+    npm install -g yarn;\
+    yarn set version berry ; \
+    yarn --version;\
+  fi
 
 RUN yarn --version
-RUN yarn config set registry https://registry.npm.taobao.org/
 
 RUN if [ $CONTAINER_PACKAGE_URL ] ; then sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories ; fi
 
