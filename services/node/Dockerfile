@@ -5,21 +5,27 @@ ARG TZ
 ARG CONTAINER_PACKAGE_URL
 ARG YARN_ENV
 
-RUN rm -rf /usr/local/bin/yarn;\
+RUN if [ "$YARN_ENV" = "2" ]; then \
+    rm -rf /usr/local/bin/yarn;\
     rm -rf /usr/local/bin/yarnpkg;\
     rm -rf /opt/yarn-v$YARN_VERSION/bin/yarn;\
     rm -rf /opt/yarn-v$YARN_VERSION/bin/yarnpkg;\
-    npm config set registry https://registry.npm.taobao.org ;\
-    npm install -g yarn;
-
-RUN if [ "$YARN_ENV" = "1" ]; then yarn set version 1.22.10; else yarn set version berry ; fi
+    npm config set registry https://registry.npm.taobao.org;\
+    npm install -g yarn;\
+    yarn set version berry;\
+    fi
 
 RUN if [ $CONTAINER_PACKAGE_URL ] ; then sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories ; fi
+
+RUN apk add --update python make g++ zsh git openssh\
+   && rm -rf /var/cache/apk/*
 
 RUN apk --no-cache add tzdata \
     && cp "/usr/share/zoneinfo/$TZ" /etc/localtime \
     && echo "$TZ" > /etc/timezone
 
-RUN apk add --no-cache bash git openssh
+# 安装 zsh
+RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
+    && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc 
 
 WORKDIR /www
