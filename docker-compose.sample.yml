@@ -1,5 +1,24 @@
 version: "3"
 services:
+  node:
+    build:
+      context: ./services/node
+      args:
+        NODE_VERSION: node:${NODE_VERSION}
+        YARN_ENV: "$YARN_ENV"
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        TZ: "$TZ"
+    container_name: node
+    volumes:
+      - ${SOURCE_DIR}:/www/:rw
+    restart: always
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    networks:
+      - default
+
   # nginx:
   #   build:
   #     context: ./services/nginx
@@ -56,25 +75,6 @@ services:
   #     - |
   #       crond
   #       /usr/local/openresty/bin/openresty -g "daemon off;"
-
-  node:
-    build:
-      context: ./services/node
-      args:
-        NODE_VERSION: node:${NODE_VERSION}
-        YARN_ENV: "$YARN_ENV"
-        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-        TZ: "$TZ"
-    container_name: node
-    volumes:
-      - ${SOURCE_DIR}:/www/:rw
-    restart: always
-    ports:
-      - "8081:80"
-    stdin_open: true
-    tty: true
-    networks:
-      - default
 
 networks:
   default:

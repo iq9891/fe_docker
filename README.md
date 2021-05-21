@@ -7,21 +7,23 @@
 
 ## 手动操作
 
-- 重命名 **.env.sample** 为 **.env**
+- 复制 **.env.sample** ，然后重命名为 **.env**
 
 |系统|命令|
 |----|----|
 |mac| `cp .env.sample .env`|
 |windows|`copy .env.sample .env`|
 
-- 复制 docker-compose 配置文件。
+- 复制 **docker-compose.sample.yml** 配置文件，然后重命名为 **docker-compose.yml**。
 
 |系统|命令|
 |----|----|
 |mac| `cp docker-compose.sample.yml docker-compose.yml`|
 |windows|`copy docker-compose.sample.yml docker-compose.yml`|
 
-- 启动 `docker-compose up -d`
+- 打包 node 环境 `docker-compose build node`
+
+- 启动 node 环境 `docker-compose up -d node`
 
 - 进入 `fe_docker/www` 目录，拷贝项目
 
