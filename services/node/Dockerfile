@@ -17,7 +17,7 @@ RUN if [ "$YARN_ENV" = "2" ]; then \
 
 RUN if [ $CONTAINER_PACKAGE_URL ] ; then sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories ; fi
 
-RUN apk add --update python make g++ zsh git openssh bash gcc autoconf automake libtool libpng libpng-dev zlib vim nasm\
+RUN apk add --update python make g++ git openssh bash gcc autoconf automake libtool libpng libpng-dev zlib vim nasm\
    && rm -rf /var/cache/apk/*
 
 RUN apk --no-cache add tzdata \
@@ -33,9 +33,5 @@ RUN yarn config set disturl https://npm.taobao.org/dist -g \
     && yarn config set fse_binary_host_mirror https://npm.taobao.org/mirrors/fsevents -g \
     && yarn config set sqlite3_binary_host_mirror https://foxgis.oss-cn-shanghai.aliyuncs.com/ \
     && yarn config set profiler_binary_host_mirror https://npm.taobao.org/mirrors/node-inspector/
-
-# 安装 zsh
-RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
-    && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc 
 
 WORKDIR /www
