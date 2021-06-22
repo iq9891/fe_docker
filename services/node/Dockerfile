@@ -17,7 +17,7 @@ RUN if [ "$YARN_ENV" = "2" ]; then \
 
 RUN if [ $CONTAINER_PACKAGE_URL ] ; then sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories ; fi
 
-RUN apk add --update python make g++ git openssh bash gcc autoconf automake libtool libpng libpng-dev zlib vim nasm\
+RUN apk add --update python3 py3-pip make g++ git openssh bash gcc autoconf automake libtool libpng libpng-dev zlib vim nasm yasm\
    && rm -rf /var/cache/apk/*
 
 RUN apk --no-cache add tzdata \
