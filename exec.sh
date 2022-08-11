@@ -1,1 +1,1 @@
-docker exec -it tobdev-vue sh
+docker exec -it fe6 zsh
