@@ -1,1 +1,1 @@
-docker run  -it --name fe6 -d fe6
+docker run -it -v $PWD/www:/root/www:rw --name fe6 -d fe6

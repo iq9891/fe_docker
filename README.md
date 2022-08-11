@@ -4,8 +4,8 @@
 ## 如何使用
 
 - 下载安装 [docker](https://www.docker.com/get-started)
-- clone 本仓库到本地
 - 把本机生成的多个 ssh 拷贝到 `./ssh` 文件夹中
+- clone 本仓库到本地 的 www 目录
 - 运行 `./build.sh`
 - 允许 `./go.sh`
 
