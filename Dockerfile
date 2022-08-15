@@ -11,6 +11,8 @@ RUN npm config set registry https://registry.npmmirror.com
 # TODO 用 pnpm 报错只能 npm 将就一下，有时间解决
 # 4.2.5 以上 scope 不能定义了
 RUN npm add -g commitizen@4.2.4
+# 全局安装 node server
+RUN npm add -g http-server
 
 # 配置 git 用户名
 RUN git config --global user.email "649076408@qq.com"
